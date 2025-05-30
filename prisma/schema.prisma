@@ -102,6 +102,7 @@ model Task {
 model TaskCompletion {
   id          String   @id @default(cuid())
   completedAt DateTime @default(now())
+  completedDate String // 格式: YYYY-MM-DD，用于防止同一天重复完成
 
   // 关联任务
   taskId      String
@@ -111,8 +112,12 @@ model TaskCompletion {
   userId      String
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  // 关联习惯
+  habitId     String
+  habit       Habit    @relation(fields: [habitId], references: [id], onDelete: Cascade)
+
   // 防止同一天重复完成同一任务
-  @@unique([taskId, userId, completedAt])
+  @@unique([taskId, userId, completedDate])
   @@map("task_completions")
 }
 
