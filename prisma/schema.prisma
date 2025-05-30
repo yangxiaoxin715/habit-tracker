@@ -14,32 +14,31 @@ datasource db {
 model User {
   id        String   @id @default(cuid())
   phone     String   @unique
-  name      String
-  role      Role     @default(PARENT)
+  name      String?
+  role      String   @default("CHILD") // "PARENT" | "CHILD"
   avatar    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   // 关联关系
-  habits            Habit[]
-  taskCompletions   TaskCompletion[]
-  pointTransactions PointTransaction[]
-  rewardRedemptions RewardRedemption[]
-  createdRewards    Reward[] // 用户创建的自定义奖励
-  
-  // 家庭关系
   parentId String?
-  parent   User?   @relation("ParentChild", fields: [parentId], references: [id])
-  children User[]  @relation("ParentChild")
-
-  // NextAuth相关
+  parent   User?   @relation("UserParent", fields: [parentId], references: [id])
+  children User[]  @relation("UserParent")
+  
+  // 其他关联
+  habits              Habit[]
+  taskCompletions     TaskCompletion[]
+  pointTransactions   PointTransaction[]
+  rewardRedemptions   RewardRedemption[]
+  createdRewards      Reward[]           @relation("RewardCreator")
+  
   accounts Account[]
   sessions Session[]
 
   @@map("users")
 }
 
-// 手机验证码表
+// 手机验证表
 model PhoneVerification {
   id        String   @id @default(cuid())
   phone     String
@@ -48,14 +47,7 @@ model PhoneVerification {
   verified  Boolean  @default(false)
   createdAt DateTime @default(now())
 
-  @@unique([phone, code])
   @@map("phone_verifications")
-}
-
-// 用户角色
-enum Role {
-  PARENT
-  CHILD
 }
 
 // 习惯表
@@ -67,13 +59,12 @@ model Habit {
   active      Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-
-  // 关联用户
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  // 关联任务
-  tasks       Task[]
+  
+  // 关联
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  tasks           Task[]
   taskCompletions TaskCompletion[]
 
   @@map("habits")
@@ -84,62 +75,50 @@ model Task {
   id          String   @id @default(cuid())
   title       String
   description String
-  order       Int
+  order       Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-
-  // 关联习惯
-  habitId     String
-  habit       Habit    @relation(fields: [habitId], references: [id], onDelete: Cascade)
-
-  // 关联完成记录
-  completions TaskCompletion[]
+  
+  // 关联
+  habitId String
+  habit   Habit  @relation(fields: [habitId], references: [id], onDelete: Cascade)
+  
+  taskCompletions TaskCompletion[]
 
   @@map("tasks")
 }
 
 // 任务完成记录表
 model TaskCompletion {
-  id          String   @id @default(cuid())
-  completedAt DateTime @default(now())
-  completedDate String // 格式: YYYY-MM-DD，用于防止同一天重复完成
+  id            String   @id @default(cuid())
+  completedDate String   // 格式: YYYY-MM-DD
+  completedAt   DateTime @default(now())
+  
+  // 关联
+  userId  String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  taskId  String
+  task    Task   @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  habitId String
+  habit   Habit  @relation(fields: [habitId], references: [id], onDelete: Cascade)
 
-  // 关联任务
-  taskId      String
-  task        Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
-
-  // 关联用户
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  // 关联习惯
-  habitId     String
-  habit       Habit    @relation(fields: [habitId], references: [id], onDelete: Cascade)
-
-  // 防止同一天重复完成同一任务
-  @@unique([taskId, userId, completedDate])
+  @@unique([taskId, userId, completedDate], name: "taskId_userId_completedDate")
   @@map("task_completions")
 }
 
 // 积分交易记录表
 model PointTransaction {
-  id          String            @id @default(cuid())
+  id          String   @id @default(cuid())
   amount      Int
-  type        PointTransactionType
+  type        String   // "EARN" | "SPEND"
   description String
-  createdAt   DateTime          @default(now())
-
-  // 关联用户
-  userId      String
-  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  
+  // 关联
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("point_transactions")
-}
-
-// 交易类型
-enum PointTransactionType {
-  EARN
-  SPEND
 }
 
 // 奖励表
@@ -147,50 +126,39 @@ model Reward {
   id          String   @id @default(cuid())
   name        String
   description String
-  cost        Int
-  type        RewardType
+  points      Int
+  type        String   // "BADGE" | "PHYSICAL" | "CUSTOM"
   image       String?
-  isActive    Boolean    @default(true)
-  isGlobal    Boolean    @default(true) // 全局奖励还是用户自定义
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-
-  // 创建者（如果是自定义奖励）
+  isActive    Boolean  @default(true)
+  isGlobal    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // 关联
   creatorId String?
-  creator   User?   @relation(fields: [creatorId], references: [id])
-
-  // 兑换记录
-  redemptions RewardRedemption[]
+  creator   User?   @relation("RewardCreator", fields: [creatorId], references: [id])
+  
+  rewardRedemptions RewardRedemption[]
 
   @@map("rewards")
 }
 
-// 奖励类型
-enum RewardType {
-  BADGE
-  PHYSICAL
-  CUSTOM
-}
-
 // 奖励兑换记录表
 model RewardRedemption {
-  id          String   @id @default(cuid())
-  redeemedAt  DateTime @default(now())
+  id         String   @id @default(cuid())
+  redeemedAt DateTime @default(now())
+  
+  // 关联
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rewardId String
+  reward   Reward @relation(fields: [rewardId], references: [id], onDelete: Cascade)
 
-  // 关联奖励
-  rewardId    String
-  reward      Reward   @relation(fields: [rewardId], references: [id], onDelete: Cascade)
-
-  // 关联用户
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  // 防止徽章类奖励重复兑换
-  @@unique([rewardId, userId])
+  @@unique([userId, rewardId])
   @@map("reward_redemptions")
 }
 
-// NextAuth相关表
+// NextAuth.js required models
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -216,7 +184,8 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
 }

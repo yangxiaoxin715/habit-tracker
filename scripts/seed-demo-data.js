@@ -108,31 +108,31 @@ async function main() {
       {
         name: '阅读小达人',
         description: '连续阅读7天获得',
-        cost: 700,
+        points: 700,
         type: 'BADGE'
       },
       {
         name: '运动健将',
         description: '连续运动14天获得',
-        cost: 1400,
+        points: 1400,
         type: 'BADGE'
       },
       {
         name: '小小图书',
         description: '可以选择一本喜欢的课外书',
-        cost: 1000,
+        points: 1000,
         type: 'PHYSICAL'
       },
       {
         name: '电影时光',
         description: '和家人一起看一部电影',
-        cost: 800,
+        points: 800,
         type: 'CUSTOM'
       },
       {
         name: '户外游玩',
         description: '周末户外活动一次',
-        cost: 1500,
+        points: 1500,
         type: 'CUSTOM'
       }
     ];
