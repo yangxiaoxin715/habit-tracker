@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
     const completedTasks = await prisma.taskCompletion.findMany({
       where: {
         userId,
-        date: today
+        completedDate: today
       },
       select: {
         taskId: true

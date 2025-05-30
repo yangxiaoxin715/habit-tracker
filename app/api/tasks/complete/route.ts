@@ -43,10 +43,10 @@ export async function POST(request: NextRequest) {
     // 检查是否已经完成过
     const existingCompletion = await prisma.taskCompletion.findUnique({
       where: {
-        userId_taskId_date: {
+        taskId_userId_completedDate: {
           userId,
           taskId,
-          date: today
+          completedDate: today
         }
       }
     });
@@ -64,8 +64,7 @@ export async function POST(request: NextRequest) {
         userId,
         taskId,
         habitId,
-        date: today,
-        pointsEarned: 100
+        completedDate: today
       }
     });
     

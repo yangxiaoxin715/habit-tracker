@@ -43,10 +43,10 @@ export async function POST(request: NextRequest) {
     // 查找今日的完成记录
     const existingCompletion = await prisma.taskCompletion.findUnique({
       where: {
-        userId_taskId_date: {
+        taskId_userId_completedDate: {
           userId,
           taskId,
-          date: today
+          completedDate: today
         }
       }
     });
