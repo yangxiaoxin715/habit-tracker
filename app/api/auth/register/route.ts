@@ -5,25 +5,25 @@ import { z } from 'zod'
 
 const registerSchema = z.object({
   name: z.string().min(1, '姓名不能为空'),
-  email: z.string().email('邮箱格式不正确'),
+  phone: z.string().min(11, '手机号格式不正确'),
   password: z.string().min(6, '密码至少需要6位'),
   role: z.enum(['PARENT', 'CHILD']).default('CHILD'),
-  parentEmail: z.string().email().optional()
+  parentPhone: z.string().optional()
 })
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { name, email, password, role, parentEmail } = registerSchema.parse(body)
+    const { name, phone, password, role, parentPhone } = registerSchema.parse(body)
 
-    // 检查邮箱是否已被使用
+    // 检查手机号是否已被使用
     const existingUser = await prisma.user.findUnique({
-      where: { email }
+      where: { phone }
     })
 
     if (existingUser) {
       return NextResponse.json(
-        { error: '该邮箱已被注册' },
+        { error: '该手机号已被注册' },
         { status: 400 }
       )
     }
@@ -33,9 +33,9 @@ export async function POST(request: NextRequest) {
 
     // 处理父子关系
     let parentId = null
-    if (role === 'CHILD' && parentEmail) {
+    if (role === 'CHILD' && parentPhone) {
       const parent = await prisma.user.findUnique({
-        where: { email: parentEmail }
+        where: { phone: parentPhone }
       })
       
       if (!parent) {
@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
       
       if (parent.role !== 'PARENT') {
         return NextResponse.json(
-          { error: '该邮箱不是家长账号' },
+          { error: '该手机号不是家长账号' },
           { status: 400 }
         )
       }
@@ -59,15 +59,14 @@ export async function POST(request: NextRequest) {
     const user = await prisma.user.create({
       data: {
         name,
-        email,
-        password: hashedPassword,
+        phone,
         role,
         parentId
       },
       select: {
         id: true,
         name: true,
-        email: true,
+        phone: true,
         role: true,
         createdAt: true
       }
