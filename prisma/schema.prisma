@@ -1,0 +1,226 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 用户表
+model User {
+  id        String   @id @default(cuid())
+  phone     String   @unique
+  name      String
+  role      Role     @default(PARENT)
+  avatar    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 关联关系
+  habits            Habit[]
+  taskCompletions   TaskCompletion[]
+  pointTransactions PointTransaction[]
+  rewardRedemptions RewardRedemption[]
+  createdRewards    Reward[] // 用户创建的自定义奖励
+  
+  // 家庭关系
+  parentId String?
+  parent   User?   @relation("ParentChild", fields: [parentId], references: [id])
+  children User[]  @relation("ParentChild")
+
+  // NextAuth相关
+  accounts Account[]
+  sessions Session[]
+
+  @@map("users")
+}
+
+// 手机验证码表
+model PhoneVerification {
+  id        String   @id @default(cuid())
+  phone     String
+  code      String
+  expiresAt DateTime
+  verified  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@unique([phone, code])
+  @@map("phone_verifications")
+}
+
+// 用户角色
+enum Role {
+  PARENT
+  CHILD
+}
+
+// 习惯表
+model Habit {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  category    String
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // 关联用户
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // 关联任务
+  tasks       Task[]
+  taskCompletions TaskCompletion[]
+
+  @@map("habits")
+}
+
+// 任务表
+model Task {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  order       Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // 关联习惯
+  habitId     String
+  habit       Habit    @relation(fields: [habitId], references: [id], onDelete: Cascade)
+
+  // 关联完成记录
+  completions TaskCompletion[]
+
+  @@map("tasks")
+}
+
+// 任务完成记录表
+model TaskCompletion {
+  id          String   @id @default(cuid())
+  completedAt DateTime @default(now())
+
+  // 关联任务
+  taskId      String
+  task        Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  // 关联用户
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // 防止同一天重复完成同一任务
+  @@unique([taskId, userId, completedAt])
+  @@map("task_completions")
+}
+
+// 积分交易记录表
+model PointTransaction {
+  id          String            @id @default(cuid())
+  amount      Int
+  type        PointTransactionType
+  description String
+  createdAt   DateTime          @default(now())
+
+  // 关联用户
+  userId      String
+  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("point_transactions")
+}
+
+// 交易类型
+enum PointTransactionType {
+  EARN
+  SPEND
+}
+
+// 奖励表
+model Reward {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  cost        Int
+  type        RewardType
+  image       String?
+  isActive    Boolean    @default(true)
+  isGlobal    Boolean    @default(true) // 全局奖励还是用户自定义
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  // 创建者（如果是自定义奖励）
+  creatorId String?
+  creator   User?   @relation(fields: [creatorId], references: [id])
+
+  // 兑换记录
+  redemptions RewardRedemption[]
+
+  @@map("rewards")
+}
+
+// 奖励类型
+enum RewardType {
+  BADGE
+  PHYSICAL
+  CUSTOM
+}
+
+// 奖励兑换记录表
+model RewardRedemption {
+  id          String   @id @default(cuid())
+  redeemedAt  DateTime @default(now())
+
+  // 关联奖励
+  rewardId    String
+  reward      Reward   @relation(fields: [rewardId], references: [id], onDelete: Cascade)
+
+  // 关联用户
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // 防止徽章类奖励重复兑换
+  @@unique([rewardId, userId])
+  @@map("reward_redemptions")
+}
+
+// NextAuth相关表
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}

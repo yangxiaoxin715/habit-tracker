@@ -1,0 +1,83 @@
+[
+  {
+    "id": "reward1",
+    "name": "阅读达人",
+    "description": "连续完成阅读习惯7天",
+    "points": 300,
+    "type": "badge",
+    "image": null,
+    "earned": true
+  },
+  {
+    "id": "reward2",
+    "name": "自律小能手",
+    "description": "连续3天按时完成所有任务",
+    "points": 500,
+    "type": "badge",
+    "image": null,
+    "earned": false
+  },
+  {
+    "id": "reward3",
+    "name": "习惯养成者",
+    "description": "累计完成50个任务",
+    "points": 1000,
+    "type": "badge",
+    "image": null,
+    "earned": false
+  },
+  {
+    "id": "reward4",
+    "name": "冰淇淋",
+    "description": "周末可以兑换一次冰淇淋",
+    "points": 500,
+    "type": "physical",
+    "image": "https://images.pexels.com/photos/1352278/pexels-photo-1352278.jpeg",
+    "earned": false
+  },
+  {
+    "id": "reward5",
+    "name": "玩具",
+    "description": "可以挑选一个喜欢的玩具",
+    "points": 800,
+    "type": "physical",
+    "image": "https://images.pexels.com/photos/163696/toy-car-toy-box-mini-163696.jpeg",
+    "earned": false
+  },
+  {
+    "id": "reward6",
+    "name": "画画套装",
+    "description": "获得一套新的绘画工具",
+    "points": 1000,
+    "type": "physical",
+    "image": "https://images.pexels.com/photos/159644/art-supplies-brushes-rulers-scissors-159644.jpeg",
+    "earned": false
+  },
+  {
+    "id": "reward7",
+    "name": "书籍",
+    "description": "可以选择一本想读的新书",
+    "points": 600,
+    "type": "physical",
+    "image": "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg",
+    "earned": false
+  },
+  {
+    "id": "reward_1748589018450_mj020kvxu",
+    "name": "看电影",
+    "description": "周末去电影院看一场喜欢的电影",
+    "points": 200,
+    "type": "custom",
+    "image": null,
+    "earned": false
+  },
+  {
+    "id": "reward_1748589196324_qoogf0afn",
+    "name": "去吃大餐",
+    "description": "去五星级酒店吃一顿自助大餐",
+    "points": 1500,
+    "type": "custom",
+    "image": null,
+    "earned": false
+  }
+]

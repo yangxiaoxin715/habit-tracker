@@ -1,0 +1,221 @@
+[
+  {
+    "id": "habit1",
+    "name": "每日阅读",
+    "description": "培养阅读兴趣，提高语言能力",
+    "category": "学习",
+    "active": true,
+    "tasks": [
+      {
+        "id": "task1-1",
+        "title": "阅读10分钟",
+        "description": "每天固定时间阅读课外书籍"
+      },
+      {
+        "id": "task1-2",
+        "title": "分享阅读内容",
+        "description": "向家长简单分享今天读到的内容"
+      },
+      {
+        "id": "task1-3",
+        "title": "提出一个问题",
+        "description": "针对阅读内容提出一个问题并思考"
+      }
+    ]
+  },
+  {
+    "id": "habit2",
+    "name": "按时完成作业",
+    "description": "培养责任感和自主学习能力",
+    "category": "学习",
+    "active": true,
+    "tasks": [
+      {
+        "id": "task2-1",
+        "title": "整理今日作业",
+        "description": "确认并列出所有需要完成的作业"
+      },
+      {
+        "id": "task2-2",
+        "title": "专注完成作业",
+        "description": "在固定时间内专注完成作业，不受干扰"
+      },
+      {
+        "id": "task2-3",
+        "title": "自我检查",
+        "description": "完成后自行检查作业是否有错误"
+      }
+    ]
+  },
+  {
+    "id": "habit3",
+    "name": "整理书包",
+    "description": "培养条理性和规划能力",
+    "category": "生活",
+    "active": false,
+    "tasks": [
+      {
+        "id": "task3-1",
+        "title": "清理不需要的物品",
+        "description": "将不需要的纸张和垃圾清理出书包"
+      },
+      {
+        "id": "task3-2",
+        "title": "准备明天所需物品",
+        "description": "根据课程表准备明天需要的书本和文具"
+      }
+    ]
+  },
+  {
+    "id": "habit4",
+    "name": "专注力训练",
+    "description": "提升学习效率和注意力",
+    "category": "学习",
+    "active": false,
+    "tasks": [
+      {
+        "id": "task4-1",
+        "title": "番茄工作法学习",
+        "description": "使用25分钟专注+5分钟休息的模式"
+      },
+      {
+        "id": "task4-2",
+        "title": "减少干扰源",
+        "description": "学习时关闭手机和其他干扰设备"
+      }
+    ]
+  },
+  {
+    "id": "habit5",
+    "name": "体育锻炼",
+    "description": "增强体质，培养运动习惯",
+    "category": "生活",
+    "active": false,
+    "tasks": [
+      {
+        "id": "task5-1",
+        "title": "运动15分钟",
+        "description": "跳绳、慢跑或其他喜欢的运动"
+      },
+      {
+        "id": "task5-2",
+        "title": "伸展活动",
+        "description": "进行简单的伸展放松活动"
+      }
+    ]
+  },
+  {
+    "id": "habit6",
+    "name": "感恩记录",
+    "description": "培养积极心态和感恩之心",
+    "category": "社交",
+    "active": false,
+    "tasks": [
+      {
+        "id": "task6-1",
+        "title": "记录三件感恩的事",
+        "description": "每天记录三件值得感恩的小事"
+      },
+      {
+        "id": "task6-2",
+        "title": "表达谢意",
+        "description": "向帮助过自己的人表达谢意"
+      }
+    ]
+  },
+  {
+    "id": "habit7",
+    "name": "早睡早起",
+    "description": "保证充足睡眠，培养规律作息",
+    "category": "生活",
+    "active": false,
+    "tasks": [
+      {
+        "id": "task7-1",
+        "title": "21:00准备睡觉",
+        "description": "在固定时间洗漱并准备睡觉"
+      },
+      {
+        "id": "task7-2",
+        "title": "6:30按时起床",
+        "description": "不赖床，按时起床准备上学"
+      }
+    ]
+  },
+  {
+    "id": "habit8",
+    "name": "主动提问",
+    "description": "培养好奇心和思考能力",
+    "category": "学习",
+    "active": false,
+    "tasks": [
+      {
+        "id": "task8-1",
+        "title": "课堂提问",
+        "description": "在课堂上至少提出一个问题"
+      },
+      {
+        "id": "task8-2",
+        "title": "思考与讨论",
+        "description": "与家长讨论一个学习中的疑问"
+      }
+    ]
+  },
+  {
+    "id": "habit9",
+    "name": "分享与沟通",
+    "description": "培养表达能力和社交技能",
+    "category": "社交",
+    "active": false,
+    "tasks": [
+      {
+        "id": "task9-1",
+        "title": "分享学校趣事",
+        "description": "每天与家人分享学校发生的有趣事情"
+      },
+      {
+        "id": "task9-2",
+        "title": "倾听他人",
+        "description": "认真倾听他人说话，不打断"
+      }
+    ]
+  },
+  {
+    "id": "habit10",
+    "name": "学习反思",
+    "description": "培养自我评估和改进能力",
+    "category": "学习",
+    "active": false,
+    "tasks": [
+      {
+        "id": "task10-1",
+        "title": "记录学习收获",
+        "description": "简单记录今天学到的新知识"
+      },
+      {
+        "id": "task10-2",
+        "title": "反思改进",
+        "description": "思考学习中的困难和改进方法"
+      }
+    ]
+  },
+  {
+    "id": "habit_1748588433673_p8ipzs69a",
+    "name": "喝水习惯",
+    "description": "保持身体水分充足",
+    "category": "生活",
+    "tasks": [
+      {
+        "id": "task_water_1",
+        "title": "早上喝一杯水",
+        "description": "起床后喝一杯温水"
+      },
+      {
+        "id": "task_water_2",
+        "title": "课间喝水",
+        "description": "每个课间休息时喝水"
+      }
+    ],
+    "active": false
+  }
+]

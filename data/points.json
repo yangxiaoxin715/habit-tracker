@@ -1,0 +1,93 @@
+[
+  {
+    "id": "point_1748588242019_b3frl1qop",
+    "amount": 100,
+    "type": "earn",
+    "description": "完成任务: task1-1",
+    "createdAt": "2025-05-30T06:57:22.019Z"
+  },
+  {
+    "id": "point_1748588279662_ekv5i8u1t",
+    "amount": 100,
+    "type": "earn",
+    "description": "完成任务: task1-1",
+    "createdAt": "2025-05-30T06:57:59.662Z"
+  },
+  {
+    "id": "point_1748588285231_oat1a0mcu",
+    "amount": 100,
+    "type": "earn",
+    "description": "完成任务: task1-2",
+    "createdAt": "2025-05-30T06:58:05.231Z"
+  },
+  {
+    "id": "point_1748588858916_xwnmomoe5",
+    "amount": 300,
+    "type": "spend",
+    "description": "兑换奖励: 阅读达人",
+    "createdAt": "2025-05-30T07:07:38.916Z"
+  },
+  {
+    "id": "point_1748589005658_gmcyl2k5v",
+    "amount": 100,
+    "type": "earn",
+    "description": "完成任务: task1-3",
+    "createdAt": "2025-05-30T07:10:05.658Z"
+  },
+  {
+    "id": "point_1748589031731_hxj4mdj01",
+    "amount": 100,
+    "type": "earn",
+    "description": "完成任务: task2-1",
+    "createdAt": "2025-05-30T07:10:31.731Z"
+  },
+  {
+    "id": "point_1748589037467_9ugqqz61m",
+    "amount": 200,
+    "type": "spend",
+    "description": "兑换奖励: 看电影",
+    "createdAt": "2025-05-30T07:10:37.467Z"
+  },
+  {
+    "id": "point_1748596103046_ypeimsqjc",
+    "amount": 100,
+    "type": "earn",
+    "description": "完成任务: task3-1",
+    "createdAt": "2025-05-30T09:08:23.046Z"
+  },
+  {
+    "id": "point_1748596104334_vjf3dqd3z",
+    "amount": 100,
+    "type": "earn",
+    "description": "完成任务: task3-2",
+    "createdAt": "2025-05-30T09:08:24.334Z"
+  },
+  {
+    "id": "point_1748596105440_4cqx39sm4",
+    "amount": 100,
+    "type": "earn",
+    "description": "完成任务: task8-1",
+    "createdAt": "2025-05-30T09:08:25.440Z"
+  },
+  {
+    "id": "point_1748596106446_s6wqpz4up",
+    "amount": 100,
+    "type": "earn",
+    "description": "完成任务: task8-2",
+    "createdAt": "2025-05-30T09:08:26.446Z"
+  },
+  {
+    "id": "point_1748596107624_cihtlvpjr",
+    "amount": 100,
+    "type": "earn",
+    "description": "完成任务: task_water_1",
+    "createdAt": "2025-05-30T09:08:27.624Z"
+  },
+  {
+    "id": "point_1748596122557_ghruw03hd",
+    "amount": 500,
+    "type": "spend",
+    "description": "兑换奖励: 冰淇淋",
+    "createdAt": "2025-05-30T09:08:42.557Z"
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "completion_1748588242019_18zqp73br",
+    "taskId": "task1-1",
+    "habitId": "habit1",
+    "completedAt": "2025-05-30T06:57:22.019Z",
+    "date": "2025-05-30",
+    "pointsEarned": 100
+  },
+  {
+    "id": "completion_1748588285230_ghcglp3ok",
+    "taskId": "task1-2",
+    "habitId": "habit1",
+    "completedAt": "2025-05-30T06:58:05.230Z",
+    "date": "2025-05-30",
+    "pointsEarned": 100
+  },
+  {
+    "id": "completion_1748589005658_bqv800r81",
+    "taskId": "task1-3",
+    "habitId": "habit1",
+    "completedAt": "2025-05-30T07:10:05.658Z",
+    "date": "2025-05-30",
+    "pointsEarned": 100
+  },
+  {
+    "id": "completion_1748589031730_z4jphgxwd",
+    "taskId": "task2-1",
+    "habitId": "habit2",
+    "completedAt": "2025-05-30T07:10:31.730Z",
+    "date": "2025-05-30",
+    "pointsEarned": 100
+  },
+  {
+    "id": "completion_1748596103045_dvr52f2kg",
+    "taskId": "task3-1",
+    "habitId": "habit3",
+    "completedAt": "2025-05-30T09:08:23.045Z",
+    "date": "2025-05-30",
+    "pointsEarned": 100
+  },
+  {
+    "id": "completion_1748596104333_m9cw6c1kh",
+    "taskId": "task3-2",
+    "habitId": "habit3",
+    "completedAt": "2025-05-30T09:08:24.333Z",
+    "date": "2025-05-30",
+    "pointsEarned": 100
+  },
+  {
+    "id": "completion_1748596105439_5w7p9n3ei",
+    "taskId": "task8-1",
+    "habitId": "habit8",
+    "completedAt": "2025-05-30T09:08:25.439Z",
+    "date": "2025-05-30",
+    "pointsEarned": 100
+  },
+  {
+    "id": "completion_1748596106445_5vor1xo18",
+    "taskId": "task8-2",
+    "habitId": "habit8",
+    "completedAt": "2025-05-30T09:08:26.445Z",
+    "date": "2025-05-30",
+    "pointsEarned": 100
+  },
+  {
+    "id": "completion_1748596107624_3gqpbzrh7",
+    "taskId": "task_water_1",
+    "habitId": "habit_1748588433673_p8ipzs69a",
+    "completedAt": "2025-05-30T09:08:27.624Z",
+    "date": "2025-05-30",
+    "pointsEarned": 100
+  }
+]
